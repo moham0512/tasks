@@ -1,0 +1,102 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#slider {
+    max-width: 800px;
+    height: 300px;
+    margin: 100px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+#slides div {
+    display: block;
+    left: 0;
+    width: inherit;
+    position: absolute;
+}
+
+#buttons button {
+    background-color: transparent;
+    padding: 5px 18px;
+    text-align: center;
+    border-radius: 60px;
+    outline: none;
+    border: none;
+    color: white;
+    font-size: 34px;
+    position: absolute;
+    top: 40%;
+    transition-duration: 0.3s;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#buttons button:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#next {
+    right: 20px;
+}
+
+#previous {
+    left: 20px;
+}
+
+#next:hover,
+#previous:hover {
+    color: lightblue;
+}
+
+#links {
+    width: 100%;
+    position: absolute;
+    bottom: -80px;
+    height: 80px;
+    background-image: linear-gradient(to top, black, rgba(0, 0, 0, 0));
+    transition: 0.3s;
+}
+
+#slider:hover #links {
+    bottom: 0;
+}
+
+#links span {
+    display: inline-block;
+    border-radius: 5px;
+    padding: 4px;
+    margin: 10px;
+    border: 1px solid;
+    background-color: rgba(255, 255, 255, 0.4);
+    position: absolute;
+    bottom: 10%;
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+#links span:hover {
+    background-color: white;
+}
+
+#links :nth-child(1) {
+    left: 370px;
+}
+
+#links :nth-child(2) {
+    left: 390px;
+}
+
+#links :nth-child(3) {
+    left: 410px;
+}
+
+#links :nth-child(4) {
+    left: 430px;
+}
+
+.bck-white {
+    background-color: white;
+}
