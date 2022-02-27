@@ -19,8 +19,7 @@
 }
 
 #slides img {
-    width: 100%;
-    vertical-align: middle;
+    display: block;
 }
 
 #buttons button {

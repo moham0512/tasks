@@ -5,23 +5,39 @@ function onLoad() {
     const slider = document.getElementById('slider');
 
 
+    let styles = getComputedStyle(slider);
+    console.log(styles.width);
 
-    // let imgStyle = getComputedStyle(slides.children[x].querySelector('img'));
-    // slider.style.height = imgStyle.height;
+    let allSlide = slides.children;
+    let images = [];
+    for (let x = 0; x < allSlide.length; x++) {
+        images[x] = allSlide[x].querySelector('img');
+        console.log(images[x]);
+    }
 
+
+    window.addEventListener('load', function() {
+        if (this.innerWidth < 800) {
+            for (let x = 0; x < images.length; x++) {
+                images[x].style.width = `${this.innerWidth}px`;
+            }
+            slider.style.height = `${images[0].height}px`;
+        } else {
+            for (let x = 0; x < images.length; x++) {
+                images[x].style.width = `800px`;
+            }
+        }
+    });
 
     window.addEventListener('resize', function() {
         if (this.innerWidth < 800) {
-            console.log(this.innerWidth);
-            for (let x = 0; x < slides.childElementCount; x++) {
-                let styles = getComputedStyle(slides.children[x].querySelector('img'));
-                console.log(styles.height)
-                slides.children[x].querySelector('img').style.width = `${this.innerWidth}px`;
-                slider.style.height = styles.height;
+            for (let x = 0; x < images.length; x++) {
+                images[x].style.width = `${this.innerWidth}px`;
             }
+            slider.style.height = `${images[0].height}px`;
         } else {
-            for (let x = 0; x < slides.childElementCount; x++) {
-                slides.children[x].querySelector('img').style.width = `${this.innerWidth}px`;
+            for (let x = 0; x < images.length; x++) {
+                images[x].style.width = `800px`;
             }
         }
     });
