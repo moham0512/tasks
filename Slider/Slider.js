@@ -2,6 +2,30 @@ function onLoad() {
     const slides = document.getElementById('slides');
     const previousButton = document.getElementById('previous');
     const nextButton = document.getElementById('next');
+    const slider = document.getElementById('slider');
+
+
+
+    // let imgStyle = getComputedStyle(slides.children[x].querySelector('img'));
+    // slider.style.height = imgStyle.height;
+
+
+    window.addEventListener('resize', function() {
+        if (this.innerWidth < 800) {
+            console.log(this.innerWidth);
+            for (let x = 0; x < slides.childElementCount; x++) {
+                let styles = getComputedStyle(slides.children[x].querySelector('img'));
+                console.log(styles.height)
+                slides.children[x].querySelector('img').style.width = `${this.innerWidth}px`;
+                slider.style.height = styles.height;
+            }
+        } else {
+            for (let x = 0; x < slides.childElementCount; x++) {
+                slides.children[x].querySelector('img').style.width = `${this.innerWidth}px`;
+            }
+        }
+    });
+
 
 
     let timeout = 3000;

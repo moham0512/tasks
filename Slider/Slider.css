@@ -18,6 +18,11 @@
     position: absolute;
 }
 
+#slides img {
+    width: 100%;
+    vertical-align: middle;
+}
+
 #buttons button {
     background-color: transparent;
     padding: 5px 18px;
@@ -54,8 +59,8 @@
 #links {
     width: 100%;
     position: absolute;
-    bottom: -80px;
-    height: 80px;
+    bottom: -25%;
+    height: 25%;
     background-image: linear-gradient(to top, black, rgba(0, 0, 0, 0));
     transition: 0.3s;
 }
@@ -82,19 +87,19 @@
 }
 
 #links :nth-child(1) {
-    left: 370px;
+    left: 46%;
 }
 
 #links :nth-child(2) {
-    left: 390px;
+    left: 49%;
 }
 
 #links :nth-child(3) {
-    left: 410px;
+    left: 52%;
 }
 
 #links :nth-child(4) {
-    left: 430px;
+    left: 55%;
 }
 
 .bck-white {
