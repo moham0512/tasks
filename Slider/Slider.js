@@ -123,6 +123,12 @@ function onLoad() {
                 if(link.previousElementSibling == null){
                     links[links.length-1].classList.remove('bck-white');
                 }
+                if(link.nextElementSibling != null){
+                    link.nextElementSibling.classList.remove('bck-white');
+                }
+                if(link.nextElementSibling == null){
+                    links[0].classList.remove('bck-white');
+                }
                 link.classList.add('bck-white');
             }
         }
