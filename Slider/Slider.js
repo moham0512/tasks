@@ -3,16 +3,12 @@ function onLoad() {
     const previousButton = document.getElementById('previous');
     const nextButton = document.getElementById('next');
     const slider = document.getElementById('slider');
-
-
-    let styles = getComputedStyle(slider);
     
     let allSlide = slides.children;
     let images = [];
     for (let x = 0; x < allSlide.length; x++) {
         images[x] = allSlide[x].querySelector('img');
     }
-
 
     window.addEventListener('load', function() {
         if (this.innerWidth < 800) {
@@ -49,6 +45,7 @@ function onLoad() {
     let lastSlide;
     let nextTimeout;
     let animating = false;
+    let linkSlider = true;
 
     nextTimeout = setTimeout(nextSlide, timeout);
 
@@ -57,6 +54,7 @@ function onLoad() {
         lastSlide = allSlides[allSlides.length - 1];
         requestAnimationFrame(moveRight);
         animating = true;
+        linkSlider = true;
     }
 
     function moveRight() {
@@ -69,6 +67,7 @@ function onLoad() {
             lastSlide.style.left = '0';
             nextTimeout = setTimeout(nextSlide, timeout);
             animating = false;
+            refresh();
         }
     }
 
@@ -93,6 +92,7 @@ function onLoad() {
         firstSlide.style.left = '800px';
         requestAnimationFrame(moveLeft);
         animating = true;
+        linkSlider = true;
     }
 
     function moveLeft() {
@@ -103,47 +103,51 @@ function onLoad() {
         } else {
             nextTimeout = setTimeout(nextSlide, timeout);
             animating = false;
+            refresh();
         }
     }
 
     
     let links = document.getElementById('links').children;
-    let lastClass = slides.lastElementChild.className;
+    links[0].classList.add('bck-white');
+    let lastClass;
 
-    setInterval(refresh , 10);
-
-    // refresh();
     function refresh(){
-        lastClass = slides.lastElementChild.className;
-        for(let link of links){
-            if(link.className == lastClass){
-                if(link.previousElementSibling != null){
-                    link.previousElementSibling.classList.remove('bck-white');
+            lastClass = slides.lastElementChild.className;
+            for(let link of links){
+                if(link.className == lastClass){
+                    link.classList.add('bck-white');
+                }else{
+                    link.classList.remove('bck-white');
                 }
-                if(link.previousElementSibling == null){
-                    links[links.length-1].classList.remove('bck-white');
-                }
-                if(link.nextElementSibling != null){
-                    link.nextElementSibling.classList.remove('bck-white');
-                }
-                if(link.nextElementSibling == null){
-                    links[0].classList.remove('bck-white');
-                }
-                link.classList.add('bck-white');
             }
-        }
     }
     
-    // slides.addEventListener('change' , function(){
-    //     lastClass = slides.lastElementChild.className;
-    //     for(let link of links){
-    //         if(link.className == lastClass){
-    //             link.previousElementSibling.classList.remove('bck-white');
-    //             link.classList.add('bck-white');
-    //         }
-    //     }
-    // });
-    
+
+    const divLinks = document.getElementById('links');
+    divLinks.addEventListener('click', function(event){
+        
+        let targetLink = event.target;
+        event.stopPropagation();
+        allSlides = document.querySelectorAll('#slides div');
+        lastSlide = allSlide[allSlide.length - 1];
+        let index = 0;
+        for(let x = 0 ; x < allSlides.length ; x++){
+            if(allSlides[x].className.includes(targetLink.className)){
+                index = (allSlides.length-1) - x;
+            }
+        }
+
+        if(index != 0 && (!animating)){
+            clearTimeout(nextTimeout);
+            for(let x = 0 ; x < index ; x++){
+                slides.insertBefore(lastSlide , slides.firstChild);
+                lastSlide = allSlide[allSlide.length - 1];
+            }
+            nextTimeout = setTimeout(nextSlide , timeout);
+            refresh();
+        }
+    });
 
 }
 
